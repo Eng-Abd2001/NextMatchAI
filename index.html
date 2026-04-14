@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Match Predictor ⚽</title>
     <style>
+        /* إعدادات عامة لمنع التداخل */
         body {
             margin: 0;
             padding: 0;
@@ -12,23 +13,46 @@
             color: #ffffff;
             font-family: 'Arial', sans-serif;
             display: flex;
+            flex-direction: column; /* ترتيب العناصر عمودياً */
+            align-items: center;
+            min-height: 100vh; /* ضمان تغطية طول الشاشة */
+        }
+
+        /* حاويات الإعلانات - تضمن عدم تخريب التصميم */
+        .ad-slot {
+            width: 100%;
+            display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            text-align: center;
+            padding: 15px 0;
+            min-height: 50px; /* مساحة محجوزة للإعلان */
+            background: rgba(0,0,0,0.2); /* تظليل بسيط لمكان الإعلان */
         }
-        .container {
+
+        /* المربع الرئيسي للموقع */
+        .main-app-container {
+            flex: 1; /* يأخذ المساحة المتبقية ويحاول التوسط */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .card-box {
             background: #1e1e1e;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
             width: 90%;
             max-width: 400px;
-            margin: 20px;
+            box-sizing: border-box;
         }
+
         h1 { font-size: 22px; margin-bottom: 10px; color: #ffffff; }
         p { font-size: 14px; color: #aaaaaa; margin-bottom: 25px; }
         
+        /* تصميم البطاقات */
         .team-card {
             background: #2a2a2a;
             padding: 20px;
@@ -43,6 +67,7 @@
         .card-bar { border-color: #a50044; background: linear-gradient(to right, rgba(0, 77, 152, 0.1), rgba(165, 0, 68, 0.1)); }
         .card-bar:hover { background: linear-gradient(to right, #004d98, #a50044); color: white; }
 
+        /* شاشات اللعبة */
         #loading-screen, #result-screen { display: none; }
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.1);
@@ -73,45 +98,17 @@
             margin: 20px 0;
             letter-spacing: 5px;
         }
-        
-        
-        
-        
-        
-        
-        
-        /* إعدادات حاوية الإعلان */
-.ad-banner-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #121212; /* نفس لون الخلفية حتى يندمج */
-    text-align: center;
-    padding: 10px 0;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-}
 
-/* رفع المحتوى قليلاً حتى لا يغطيه الإعلان */
-body {
-    padding-bottom: 80px; 
-}
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        /* مكان إعلان داخل المربع */
+        .internal-ad {
+            margin: 20px 0;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
     </style>
 </head>
 <body>
+
 
 
 
@@ -138,36 +135,49 @@ body {
 
 
 
+    <div class="ad-slot" id="top-ad">
+        <span style="color:#444; font-size:10px;">ADVERTISEMENT</span>
+    </div>
 
+    <div class="main-app-container">
+        
+        <div class="card-box">
+            
+            <div id="step-1">
+                <h1>AI Match Predictor ⚽</h1>
+                <p>Select a team to see the AI prediction for their next match!</p>
+                <div class="team-card card-rma" onclick="startAI('Real Madrid')">
+                    <h2 style="margin:0">Real Madrid CF</h2>
+                </div>
+                <div class="team-card card-bar" onclick="startAI('FC Barcelona')">
+                    <h2 style="margin:0">FC Barcelona</h2>
+                </div>
+            </div>
 
+            <div id="loading-screen">
+                <div class="spinner"></div>
+                <h2 id="loading-title">Analyzing...</h2>
+                <p id="loading-text">Connecting to sports database...</p>
+            </div>
 
+            <div id="result-screen">
+                <h1 id="res-team-name">Prediction Ready!</h1>
+                <div class="final-score" id="score-display">?-?</div>
+                <p>AI Confidence Level: 94.2%</p>
+                <button class="reveal-btn" id="reveal-btn" onclick="showScore()">Show AI Score</button>
+                
+                <div class="internal-ad">
+                     <span style="color:#444; font-size:10px;">PROMOTED CONTENT</span>
+                </div>
 
+                <button class="reveal-btn" style="background:#444; color:white; margin-top:10px; display:none;" id="reset-btn" onclick="location.reload()">New Prediction</button>
+            </div>
 
-
-
-    <div class="container" id="step-1">
-        <h1>AI Match Predictor ⚽</h1>
-        <p>Select a team to see the AI prediction for their next match!</p>
-        <div class="team-card card-rma" onclick="startAI('Real Madrid')">
-            <h2 style="margin:0">Real Madrid CF</h2>
-        </div>
-        <div class="team-card card-bar" onclick="startAI('FC Barcelona')">
-            <h2 style="margin:0">FC Barcelona</h2>
         </div>
     </div>
 
-    <div class="container" id="loading-screen">
-        <div class="spinner"></div>
-        <h2 id="loading-title">Analyzing...</h2>
-        <p id="loading-text">Connecting to sports database...</p>
-    </div>
-
-    <div class="container" id="result-screen">
-        <h1 id="res-team-name">Prediction Ready!</h1>
-        <div class="final-score" id="score-display">?-?</div>
-        <p>AI Confidence Level: 94.2%</p>
-        <button class="reveal-btn" id="reveal-btn" onclick="showScore()">Show AI Score</button>
-        <button class="reveal-btn" style="background:#444; color:white; margin-top:10px; display:none;" id="reset-btn" onclick="location.reload()">New Prediction</button>
+    <div class="ad-slot" id="bottom-ad">
+        <span style="color:#444; font-size:10px;">ADVERTISEMENT</span>
     </div>
 
     <script>
@@ -189,25 +199,13 @@ body {
         }
 
         function showScore() {
-            // توليد نتيجة عشوائية منطقية لمباراة كرة قدم
             const score1 = Math.floor(Math.random() * 4);
             const score2 = Math.floor(Math.random() * 3);
-            
             document.getElementById('score-display').innerText = score1 + " - " + score2;
             document.getElementById('reveal-btn').style.display = 'none';
             document.getElementById('reset-btn').style.display = 'block';
         }
     </script>
-    
-    
-    
-    
-    
-    
-    
-    
-    <script src="https://pl29153548.profitablecpmratenetwork.com/4c/6f/17/4c6f170825138514e6c4edea2faeed55.js"></script>
-
     
     
     
@@ -229,33 +227,16 @@ body {
     
     
     
+    
+    
+    
+    
+    
+    
+    <script src="https://pl29153548.profitablecpmratenetwork.com/4c/6f/17/4c6f170825138514e6c4edea2faeed55.js"></script>
 
-
-
-
-
-
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="ad-banner-container">
-    
-    </div>
-
     
     
     
