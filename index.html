@@ -43,10 +43,11 @@
             background: #1e1e1e;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 25px rgba(0, 255, 136, 0.1);
             width: 90%;
             max-width: 400px;
             box-sizing: border-box;
+            text-align: center;
         }
 
         h1 { font-size: 22px; margin-bottom: 10px; color: #ffffff; }
@@ -63,9 +64,9 @@
             border: 2px solid transparent;
         }
         .card-rma { border-color: #dddddd; }
-        .card-rma:hover { background: #ffffff; color: #121212; }
+        .card-rma:hover { background: #ffffff; color: #121212; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
         .card-bar { border-color: #a50044; background: linear-gradient(to right, rgba(0, 77, 152, 0.1), rgba(165, 0, 68, 0.1)); }
-        .card-bar:hover { background: linear-gradient(to right, #004d98, #a50044); color: white; }
+        .card-bar:hover { background: linear-gradient(to right, #004d98, #a50044); color: white; box-shadow: 0 0 15px rgba(165,0,68,0.3); }
 
         /* شاشات اللعبة */
         #loading-screen, #result-screen { display: none; }
@@ -90,6 +91,11 @@
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+            transition: 0.3s;
+        }
+        .reveal-btn:hover {
+            transform: scale(1.02);
         }
         .final-score {
             font-size: 48px;
@@ -135,6 +141,20 @@
 
 
 
+<script src="https://pl29153548.profitablecpmratenetwork.com/4c/6f/17/4c6f170825138514e6c4edea2faeed55.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="ad-slot" id="top-ad">
         <span style="color:#444; font-size:10px;">ADVERTISEMENT</span>
     </div>
@@ -144,7 +164,7 @@
         <div class="card-box">
             
             <div id="step-1">
-                <h1>AI Match Predictor ⚽</h1>
+                <h1 style="color: #00ff88;">AI Match Predictor ⚽</h1>
                 <p>Select a team to see the AI prediction for their next match!</p>
                 <div class="team-card card-rma" onclick="startAI('Real Madrid')">
                     <h2 style="margin:0">Real Madrid CF</h2>
@@ -156,12 +176,12 @@
 
             <div id="loading-screen">
                 <div class="spinner"></div>
-                <h2 id="loading-title">Analyzing...</h2>
+                <h2 id="loading-title" style="color: #00ff88;">Analyzing...</h2>
                 <p id="loading-text">Connecting to sports database...</p>
             </div>
 
             <div id="result-screen">
-                <h1 id="res-team-name">Prediction Ready!</h1>
+                <h1 id="res-team-name" style="color: #ffffff;">Prediction Ready!</h1>
                 <div class="final-score" id="score-display">?-?</div>
                 <p>AI Confidence Level: 94.2%</p>
                 <button class="reveal-btn" id="reveal-btn" onclick="showScore()">Show AI Score</button>
@@ -170,7 +190,7 @@
                      <span style="color:#444; font-size:10px;">PROMOTED CONTENT</span>
                 </div>
 
-                <button class="reveal-btn" style="background:#444; color:white; margin-top:10px; display:none;" id="reset-btn" onclick="location.reload()">New Prediction</button>
+                <button class="reveal-btn" style="background:#444; color:white; margin-top:10px; display:none; box-shadow:none;" id="reset-btn" onclick="location.reload()">New Prediction</button>
             </div>
 
         </div>
@@ -182,6 +202,9 @@
 
     <script>
         let selectedTeam = "";
+        
+        // 🔴🔴🔴 الصق رابط السمارت لنك الخاص بك بين علامتي التنصيص هنا 🔴🔴🔴
+        const smartLinkURL = "https://www.profitablecpmratenetwork.com/ey96x8ua0?key=e2e3a6c8d246fb75cfde14d235d3bb42";
 
         function startAI(teamName) {
             selectedTeam = teamName;
@@ -199,13 +222,25 @@
         }
 
         function showScore() {
+            // فتح السمارت لنك في نافذة جديدة عند الضغط لتجنب التعارض مع LeadsLeap
+            if(smartLinkURL !== "https://your-smart-link-here.com" && smartLinkURL !== "") {
+                window.open(smartLinkURL, '_blank');
+            }
+
+            // توليد وعرض النتيجة العشوائية في نفس الصفحة
             const score1 = Math.floor(Math.random() * 4);
             const score2 = Math.floor(Math.random() * 3);
             document.getElementById('score-display').innerText = score1 + " - " + score2;
+            
+            // إخفاء زر الكشف وإظهار زر إعادة المحاولة
             document.getElementById('reveal-btn').style.display = 'none';
             document.getElementById('reset-btn').style.display = 'block';
         }
     </script>
+    
+    
+    
+    
     
     
     
@@ -227,14 +262,6 @@
     
     
     
-    
-    
-    
-    
-    
-    
-    <script src="https://pl29153548.profitablecpmratenetwork.com/4c/6f/17/4c6f170825138514e6c4edea2faeed55.js"></script>
-
     
     
     
